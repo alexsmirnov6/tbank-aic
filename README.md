@@ -1,2 +1,10 @@
-# tbank-phonix
-Top-1 solution to the international AI Challenge hackathon in the "Self-Development" track from T-Bank
+# T-Bank [RASCAR] Phonix
+(Nikita Iltyakov)([https://github.com/Lareton]) and I are pleased to share our victory at the international (AI Challenge)([https://aiijc.com/en/]), in which our team from ITMO and HSE Universities solved the problem of speech defects recognition in audio. I would also like to thank (Gleb Bondarchuk)([https://github.com/BondarchukGleb42]) and (Nikita Ugryumov)([https://github.com/Notkit268]) for their contribution to the development of the project after the end of the competition.
+![image](https://github.com/user-attachments/assets/e35b06f2-98a1-4cdb-b24d-f624e833d65c)
+Our task was to classify speech defects (or their absence) in order to create an online simulator based on this, which could help people correct these defects. The dataset was small (approximately 2 thousand audio recordings, no more than ten seconds long), terribly balanced (there were more than two hundred people without speech defects for every one person with stuttering), and with very poor sound quality, such that we could barely understand what they were saying, and, more importantly, did the speaker have any speech defects?
+
+To compensate for this, we used Whisper-large to divide the audio into short fragments containing one word each. We conducted experiments with denoisers and used class weights. The most useful and elegant method we applied was two-step wav2vec2 training. We first trained the model to count problematic letters in a word, such as defects like burr or fricative "G". Then we trained it for the task of recognizing speech defects, which allowed it to adapt to the domain and understand which patterns to rely on for recognizing a defect in pronunciation. Finally, we aggregated predictions for each audio fragment and received the final result.
+
+The final wav2vec2 classifier, although it was initially light, was optimized using quantization, which gave a two-fold increase in speed without loss of quality. The entire pipeline was wrapped in an API and a web interface was implemented based on it. The task was very interesting, we thank the organizers for the opportunity to solve it and other teams for their work and the exciting competition throughout the competition.
+
+The task was very cool, we thank the organizers for the opportunity to solve it and the other teams for their work and exciting competition.
