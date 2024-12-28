@@ -1,0 +1,7 @@
+service: "service:svc"  # Укажите путь к вашему сервису (замените 'service:svc' на правильное имя)
+include:
+  - "*.py"  # Включите все файлы Python
+python:
+  packages:
+    - transformers
+    - bentoml
